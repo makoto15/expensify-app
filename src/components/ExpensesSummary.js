@@ -1,13 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ExpenseTotal from '../selectors/expenses-total';
+import selectExpenses from '../selectors/expenses';
 import numeral from 'numeral';
 
-class ExpensesSummary extends React.Component {
+export class ExpensesSummary extends React.Component {
   render() {
+    const expenseWord = this.props.expenses.length === 1 ? 'expense' : 'expenses';
     return (
       <div>
-        <h1>Viewing {this.props.expenses.length} expenses totalling {numeral(this.props.expensesTotal / 100).format('$0,0.00')}</h1>
+        <h1>Viewing {this.props.expenses.length} {expenseWord} totalling {numeral(this.props.expensesTotal / 100).format('$0,0.00')}</h1>
       </div>
     )
   };
@@ -15,7 +17,7 @@ class ExpensesSummary extends React.Component {
 
 const mapStateToProps = (state) => (
   {  
-    expenses: state.expenses,
+    expenses: selectExpenses(state.expenses, state.filters),
     expensesTotal: ExpenseTotal(state.expenses) 
   }
 )
