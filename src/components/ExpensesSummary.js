@@ -7,7 +7,7 @@ class ExpensesSummary extends React.Component {
   render() {
     return (
       <div>
-        <p>Viewing {this.props.expenses.length} expenses totalling {numeral(this.props.expensesTotal / 100).format('$0,0.00')}</p>
+        <h1>Viewing {this.props.expenses.length} expenses totalling {numeral(this.props.expensesTotal / 100).format('$0,0.00')}</h1>
       </div>
     )
   };
